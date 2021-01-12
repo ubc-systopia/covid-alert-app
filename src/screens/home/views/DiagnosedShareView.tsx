@@ -5,7 +5,7 @@ import {Text, ButtonSingleLine, Box} from 'components';
 import {useAccessibilityAutoFocus} from 'shared/useAccessibilityAutoFocus';
 import AsyncStorage from '@react-native-community/async-storage';
 import {INITIAL_TEK_UPLOAD_COMPLETE} from 'shared/DataSharing';
-import {StyleSheet, Platform} from 'react-native';
+import styles from 'shared/theme/styles';
 
 import {BaseHomeView} from '../components/BaseHomeView';
 
@@ -22,7 +22,7 @@ export const DiagnosedShareView = ({isBottomSheetExpanded}: {isBottomSheetExpand
   return (
     <BaseHomeView iconName="hand-reminder" testID="diagnosedShare">
       <Box
-        style={styles.roundedBox}
+        style={styles.roundedBox1}
         backgroundColor="bodyTitleWhite"
         paddingHorizontal="m"
         paddingVertical="m"
@@ -50,11 +50,3 @@ export const DiagnosedShareView = ({isBottomSheetExpanded}: {isBottomSheetExpand
     </BaseHomeView>
   );
 };
-const styles = StyleSheet.create({
-  roundedBox: {
-    marginTop: Platform.OS === 'ios' ? 5 : 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    zIndex: -1,
-  },
-});

@@ -4,7 +4,8 @@ import {useI18n} from 'locale';
 import {useStorage} from 'services/StorageService';
 import {hoursFromNow} from 'shared/date-fns';
 import {useAccessibilityAutoFocus} from 'shared/useAccessibilityAutoFocus';
-import {StyleSheet, Platform} from 'react-native';
+import styles from 'shared/theme/styles';
+import {Platform} from 'react-native';
 
 import {AllSetView} from '../components/AllSetView';
 import {BaseHomeView} from '../components/BaseHomeView';
@@ -68,16 +69,3 @@ export const NoExposureCoveredRegionView = ({isBottomSheetExpanded}: {isBottomSh
     </BaseHomeView>
   );
 };
-
-const styles = StyleSheet.create({
-  roundedBox1: {
-    marginTop: Platform.OS === 'ios' ? 5 : -20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    zIndex: -1,
-  },
-  roundedBox2: {
-    borderRadius: 10,
-    backgroundColor: 'white',
-  },
-});

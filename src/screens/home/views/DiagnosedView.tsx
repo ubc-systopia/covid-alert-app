@@ -9,7 +9,7 @@ import {useAccessibilityAutoFocus} from 'shared/useAccessibilityAutoFocus';
 import {isRegionActive} from 'shared/RegionLogic';
 import {useRegionalI18n} from 'locale/regional';
 import {TEST_MODE} from 'env';
-import {StyleSheet, Platform} from 'react-native';
+import styles from 'shared/theme/styles';
 
 import {BaseHomeView} from '../components/BaseHomeView';
 import {Tip} from '../components/Tip';
@@ -32,7 +32,7 @@ export const DiagnosedView = ({isBottomSheetExpanded}: {isBottomSheetExpanded: b
   return (
     <BaseHomeView iconName="hand-thank-you-with-love" testID="diagnosed">
       <Box
-        style={styles.roundedBox}
+        style={styles.roundedBox1}
         backgroundColor="bodyTitleWhite"
         paddingHorizontal="m"
         paddingVertical="m"
@@ -56,7 +56,7 @@ export const DiagnosedView = ({isBottomSheetExpanded}: {isBottomSheetExpanded: b
       {daysLeft < 1 ? null : (
         <>
           <Box
-            style={styles.roundedBox}
+            style={styles.roundedBox1}
             backgroundColor="bodyTitleWhite"
             paddingHorizontal="m"
             paddingVertical="m"
@@ -72,11 +72,3 @@ export const DiagnosedView = ({isBottomSheetExpanded}: {isBottomSheetExpanded: b
     </BaseHomeView>
   );
 };
-const styles = StyleSheet.create({
-  roundedBox: {
-    marginTop: Platform.OS === 'ios' ? 5 : 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    zIndex: -1,
-  },
-});

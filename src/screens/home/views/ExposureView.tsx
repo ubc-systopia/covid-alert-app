@@ -6,7 +6,7 @@ import {isRegionActive} from 'shared/RegionLogic';
 import {useStorage} from 'services/StorageService';
 import {useRegionalI18n} from 'locale/regional';
 import {ExposedHelpButton} from 'components/ExposedHelpButton';
-import {StyleSheet, Platform} from 'react-native';
+import styles from 'shared/theme/styles';
 
 import {BaseHomeView} from '../components/BaseHomeView';
 
@@ -65,16 +65,3 @@ export const ExposureView = ({isBottomSheetExpanded}: {isBottomSheetExpanded: bo
     </BaseHomeView>
   );
 };
-
-const styles = StyleSheet.create({
-  roundedBox1: {
-    marginTop: Platform.OS === 'ios' ? 5 : -20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    zIndex: -1,
-  },
-  roundedBox2: {
-    borderRadius: 10,
-    backgroundColor: 'white',
-  },
-});
