@@ -3,7 +3,7 @@ import Animated, {sub, abs} from 'react-native-reanimated';
 import {useNetInfo} from '@react-native-community/netinfo';
 import {Box, InfoBlock, BoxProps, InfoButton, BottomSheetBehavior, Icon} from 'components';
 import {useI18n, I18n} from 'locale';
-import {Linking, Platform, TouchableOpacity, StyleSheet, View} from 'react-native';
+import {Linking, Platform, TouchableOpacity, View} from 'react-native';
 import {
   ExposureStatusType,
   SystemStatus,
@@ -17,6 +17,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useAccessibilityService} from 'services/AccessibilityService';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useStorage} from 'services/StorageService';
+import styles from 'shared/theme/styles';
 
 import {InfoShareView} from './InfoShareView';
 import {StatusHeaderView} from './StatusHeaderView';
@@ -237,11 +238,11 @@ const AccessibleView = ({children}: {children: React.ReactNode}) => {
   const accessibilityService = useAccessibilityService();
 
   return accessibilityService.isScreenReaderEnabled ? (
-    <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.overlayContent} showsVerticalScrollIndicator={false}>
       {children}
     </ScrollView>
   ) : (
-    <View style={styles.content}>{children}</View>
+    <View style={styles.overlayContent}>{children}</View>
   );
 };
 
@@ -264,7 +265,7 @@ export const OverlayView = ({status, notificationWarning, turnNotificationsOn, b
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={bottomSheetBehavior.collapse}
-              style={styles.collapseButton}
+              style={styles.overlayCollapseButton}
               accessibilityLabel={i18n.translate('BottomSheet.Collapse')}
               accessibilityRole="button"
               testID="BottomSheet-Close"
@@ -323,16 +324,3 @@ export const OverlayView = ({status, notificationWarning, turnNotificationsOn, b
     </Animated.View>
   );
 };
-
-const styles = StyleSheet.create({
-  content: {
-    marginTop: -26,
-  },
-  collapseButton: {
-    height: 48,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginBottom: -10,
-  },
-});

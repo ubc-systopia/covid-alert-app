@@ -1,11 +1,12 @@
 import React, {useCallback, useContext} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView} from 'react-native';
 import {Box, Text} from 'components';
 import {useI18n} from 'locale';
 import {useNavigation} from '@react-navigation/native';
 import {FormContext} from 'shared/FormContext';
 import {ContagiousDateType} from 'shared/DataSharing';
 import {parseDateString} from 'shared/date-fns';
+import styles from 'shared/theme/styles';
 
 import {BaseTekUploadView, DatePicker, StepXofY} from './components';
 
@@ -43,9 +44,3 @@ export const SymptomOnsetDateScreen = () => {
     </BaseTekUploadView>
   );
 };
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-});

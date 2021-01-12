@@ -1,8 +1,9 @@
 import React, {useCallback} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView} from 'react-native';
 import {Box, Text, Button} from 'components';
 import {useI18n} from 'locale';
 import {useNavigation} from '@react-navigation/native';
+import styles from 'shared/theme/styles';
 
 import {BaseDataSharingView} from './components/BaseDataSharingView';
 
@@ -42,8 +43,3 @@ export const IntermediateInstructionScreen = () => {
     </BaseDataSharingView>
   );
 };
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-});

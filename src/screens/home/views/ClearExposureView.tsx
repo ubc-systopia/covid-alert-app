@@ -1,10 +1,11 @@
 import React, {useCallback} from 'react';
-import {ScrollView, StyleSheet, Alert} from 'react-native';
+import {ScrollView, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, Box, Button, ButtonSingleLine, Toolbar} from 'components';
 import {useNavigation} from '@react-navigation/native';
 import {useClearExposedStatus} from 'services/ExposureNotificationService';
 import {useI18n} from 'locale';
+import styles from 'shared/theme/styles';
 
 export const DismissAlertScreen = () => {
   const i18n = useI18n();
@@ -82,9 +83,3 @@ export const NegativeTestButton = () => {
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-});

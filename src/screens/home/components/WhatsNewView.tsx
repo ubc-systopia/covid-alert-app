@@ -1,7 +1,8 @@
 import React from 'react';
 import {Box, Text, TextMultiline} from 'components';
 import {useI18n} from 'locale';
-import {StyleSheet, Platform} from 'react-native';
+import {Platform} from 'react-native';
+import styles from 'shared/theme/styles';
 
 export const WhatsNew = () => {
   const i18n = useI18n();
@@ -36,10 +37,3 @@ export const WhatsNew = () => {
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  roundedBox2: {
-    borderRadius: 10,
-    backgroundColor: 'white',
-  },
-});

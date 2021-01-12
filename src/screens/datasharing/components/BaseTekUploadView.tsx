@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {ActivityIndicator, ScrollView, StyleSheet, Alert} from 'react-native';
+import {ActivityIndicator, ScrollView, Alert} from 'react-native';
 import {Box, Button} from 'components';
 import {useI18n} from 'locale';
 import {useReportDiagnosis, cannotGetTEKsError} from 'services/ExposureNotificationService';
@@ -8,6 +8,7 @@ import {covidshield} from 'services/BackendService/covidshield';
 import {xhrError} from 'shared/fetch';
 import AsyncStorage from '@react-native-community/async-storage';
 import {INITIAL_TEK_UPLOAD_COMPLETE, ContagiousDateInfo, ContagiousDateType} from 'shared/DataSharing';
+import styles from 'shared/theme/styles';
 
 import {BaseDataSharingView} from './BaseDataSharingView';
 
@@ -112,9 +113,3 @@ export const BaseTekUploadView = ({
     </BaseDataSharingView>
   );
 };
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-});

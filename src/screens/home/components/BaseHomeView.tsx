@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Box, Header, Icon, IconName} from 'components';
+import styles from 'shared/theme/styles';
 
 interface BaseHomeViewProps {
   children?: React.ReactNode;
@@ -42,17 +43,3 @@ export const BaseHomeView = ({children, iconName, testID}: BaseHomeViewProps) =>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  primaryIcon: {marginLeft: -40, marginBottom: 30},
-  scrollContainerWithAnimation: {
-    marginTop: -100,
-  },
-  scrollView: {
-    height: '100%',
-  },
-  scrollContainer: {
-    maxWidth: 600,
-    alignItems: 'flex-start',
-  },
-});
