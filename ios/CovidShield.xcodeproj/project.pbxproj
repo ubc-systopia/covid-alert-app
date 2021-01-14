@@ -85,7 +85,6 @@
 		A4E2F5ED258A84B50037F403 /* ENActivityHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ENActivityHandling.h; path = CovidShield/ENActivityHandling.h; sourceTree = "<group>"; };
 		A4E2F5EE258A84B50037F403 /* ENActivityHandling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ENActivityHandling.m; path = CovidShield/ENActivityHandling.m; sourceTree = "<group>"; };
 		BA9ECBC225ACEC9D00D5F5B9 /* CovidShieldStaging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidShieldStaging.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA9ECBC325ACEC9D00D5F5B9 /* CovidShield copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CovidShield copy-Info.plist"; path = "/Users/samojled/Code/gcdigital/covid-shield-mobile/ios/CovidShield copy-Info.plist"; sourceTree = "<absolute>"; };
 		DB9A1444C934C41C93EB531F /* Pods-CovidShield.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidShield.debug.xcconfig"; path = "Target Support Files/Pods-CovidShield/Pods-CovidShield.debug.xcconfig"; sourceTree = "<group>"; };
 		E93E71E0D77549B3926CABCB /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Regular.ttf"; path = "../src/assets/fonts/NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -215,7 +214,6 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				807ECFA983CE0C8C519844E4 /* Pods */,
 				230799A3CC6E45FCAF228799 /* Resources */,
-				BA9ECBC325ACEC9D00D5F5B9 /* CovidShield copy-Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
