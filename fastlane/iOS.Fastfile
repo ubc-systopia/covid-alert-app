@@ -64,12 +64,7 @@ platform :ios do
       scheme: "CovidShield",
       workspace: "./ios/CovidShield.xcworkspace",
       export_method: "app-store",
-      output_directory: output_directory,
-      export_options: {
-        provisioningProfiles: {
-          ENV["APP_ID"] => ENV["PROFILE"]
-        }
-      }
+      output_directory: output_directory
     )
 
     # Upload to TestFlight
