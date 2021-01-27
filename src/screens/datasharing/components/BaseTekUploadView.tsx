@@ -35,10 +35,12 @@ export const BaseTekUploadView = ({
   const {fetchAndSubmitKeys, setIsUploading} = useReportDiagnosis();
   const addEvent = useMetrics();
 
-  const onSuccess = useCallback(() => {
-    AsyncStorage.setItem(INITIAL_TEK_UPLOAD_COMPLETE, 'true');
+  const onSuccess = useCallback(async () => {
+    await AsyncStorage.setItem(INITIAL_TEK_UPLOAD_COMPLETE, 'true');
+    setIsUploading(false);
+    setLoading(false);
     navigation.navigate('Home');
-  }, [navigation]);
+  }, [navigation, setIsUploading]);
   // TEK = Temporary Exposure Key
   const getTranslationKey = (error: any) => {
     if (Object.values(covidshield.EncryptedUploadResponse.ErrorCode).includes(error)) {
@@ -77,8 +79,6 @@ export const BaseTekUploadView = ({
 
     try {
       await fetchAndSubmitKeys(contagiousDateInfo);
-      setLoading(false);
-      setIsUploading(false);
 
       let eventType: EventTypeMetric = EventTypeMetric.OtkWithDate;
 
