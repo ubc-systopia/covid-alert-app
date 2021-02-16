@@ -5,7 +5,14 @@ import PushNotification from 'bridge/PushNotification';
 import {useI18nRef, I18n} from 'locale';
 
 import {Observable} from './Observable';
-import {CheckInData, getNewOutbreakStatus, getOutbreakEvents, initialOutbreakStatus, OutbreakStatus} from './qr';
+import {
+  CheckInData,
+  getNewOutbreakStatus,
+  getOutbreakEvents,
+  initialOutbreakStatus,
+  OutbreakStatus,
+  OutbreakStatusType,
+} from './qr';
 import {createCancellableCallbackPromise} from './cancellablePromise';
 
 class OutbreakService implements OutbreakService {
@@ -57,7 +64,7 @@ class OutbreakService implements OutbreakService {
   };
 
   processOutbreakNotification = (status: OutbreakStatus) => {
-    if (status.type === 'exposed') {
+    if (status.type === OutbreakStatusType.Exposed) {
       PushNotification.presentLocalNotification({
         alertTitle: this.i18n.translate('Notification.OutbreakMessageTitle'),
         alertBody: this.i18n.translate('Notification.OutbreakMessageBody'),

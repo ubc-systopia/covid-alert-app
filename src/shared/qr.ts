@@ -43,8 +43,9 @@ export const getOutbreakEvents = async (): Promise<covidshield.OutbreakEvent[]> 
   const fetchedData = await fetch(OUTBREAK_LOCATIONS_URL, {
     method: 'GET',
   });
-  const data = await fetchedData.json();
-  return data.exposedLocations;
+  const outbreakEventExport: covidshield.OutbreakEventExport = await fetchedData.json();
+  // const outbreakEventResponse: covidshield.OutbreakEventResponse = data.exposedLocations;
+  return outbreakEventExport.toJSON().locations;
 };
 
 export const getNewOutbreakStatus = (
