@@ -44,8 +44,8 @@ export const getOutbreakEvents = async (): Promise<covidshield.OutbreakEvent[]> 
     method: 'GET',
   });
   const outbreakEventExport: covidshield.OutbreakEventExport = await fetchedData.json();
-  // const outbreakEventResponse: covidshield.OutbreakEventResponse = data.exposedLocations;
-  return outbreakEventExport.toJSON().locations;
+  // @ts-ignore - this won't be necessary once we are getting the data from the server
+  return outbreakEventExport.locations;
 };
 
 export const getNewOutbreakStatus = (
