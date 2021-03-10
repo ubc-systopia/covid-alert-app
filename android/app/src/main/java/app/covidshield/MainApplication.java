@@ -1,29 +1,22 @@
 package app.covidshield;
 
 import android.app.Application;
-import android.content.Context;
-
-import androidx.work.Configuration;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.List;
+import com.github.tony19.timber.loggly.LogglyTree;
 
 import org.unimodules.adapters.react.ModuleRegistryAdapter;
 import org.unimodules.adapters.react.ReactModuleRegistryProvider;
-import org.unimodules.core.interfaces.SingletonModule;
+
+import java.util.Arrays;
+import java.util.List;
 
 import app.covidshield.generated.BasePackageList;
-
+import timber.log.Timber;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -66,6 +59,11 @@ public class MainApplication extends Application implements ReactApplication {
     public void onCreate() {
         instance = this;
         super.onCreate();
+        if (BuildConfig.TEST_MODE.equalsIgnoreCase("true") && !BuildConfig.LOGGLY_TOKEN.equals("")){
+            Timber.plant(new LogglyTree(BuildConfig.LOGGLY_TOKEN));
+            Timber.tag("covid-alert-android");
+            Timber.i("MainApplication.onCreate()");
+        }
         SoLoader.init(this, /* native exopackage */ false);
     }
 }
