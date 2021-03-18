@@ -29,7 +29,7 @@ object MetricsService {
     }
 
     @JvmStatic
-    fun publishDebugMetric(stepNumber: Double, context: Context) {
+    fun publishDebugMetric(stepNumber: Double, context: Context, message: String? = "") {
 
         fun serializeMetricPayload(stepNumber: Double, lifecycleId: String, lifeCycleDailyCount: Number): JSONObject {
             val jsonObject = JSONObject();
@@ -52,12 +52,12 @@ object MetricsService {
         val lifecycleIdentifier = DebugMetricsLifecycleInformationProvider.getLifecycleIdentifier()
         val lifecycleDailyCount = DebugMetricsLifecycleInformationProvider.getLifecycleDailyCount(context)
         val serializedMetricPayload = serializeMetricPayload(stepNumber, lifecycleIdentifier, lifecycleDailyCount)
-        val serializedGlobalMetricsPayload = serializeGlobalMetricsPayload(serializedMetricPayload, context)
+        val serializedGlobalMetricsPayload = serializeGlobalMetricsPayload(serializedMetricPayload, context, message)
 
         this.push(serializedGlobalMetricsPayload, context)
     }
 
-    private fun serializeGlobalMetricsPayload(metricPayload: JSONObject, context: Context): JSONObject {
+    private fun serializeGlobalMetricsPayload(metricPayload: JSONObject, context: Context, message: String? = ""): JSONObject {
         val jsonObject = JSONObject();
 
         jsonObject.put("metricstimestamp", TimeUnit.MILLISECONDS.toMillis(System.currentTimeMillis()))
@@ -68,6 +68,7 @@ object MetricsService {
         jsonObject.put("manufacturer", android.os.Build.MANUFACTURER)
         jsonObject.put("model", android.os.Build.MODEL)
         jsonObject.put("androidreleaseversion", android.os.Build.VERSION.RELEASE)
+        jsonObject.put("message", message)
 
         val jsonArray = JSONArray()
         jsonArray.put(metricPayload)

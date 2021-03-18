@@ -22,6 +22,7 @@ import app.covidshield.extensions.toWritableMap
 import app.covidshield.models.Configuration
 import app.covidshield.models.ExposureKey
 import app.covidshield.receiver.ExposureNotificationBroadcastReceiver
+import app.covidshield.services.metrics.MetricsService
 import app.covidshield.utils.ActivityResultHelper
 import app.covidshield.utils.CovidShieldException.ApiNotConnectedException
 import app.covidshield.utils.CovidShieldException.ApiNotEnabledException
@@ -50,6 +51,7 @@ import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.util.*
 import kotlin.coroutines.CoroutineContext
+import app.covidshield.services.metrics.MetricsService.publishDebugMetric
 
 private const val SUMMARY_HIDDEN_KEY = "_summaryIdx"
 
@@ -128,10 +130,15 @@ class ExposureNotificationModule(context: ReactApplicationContext) : ReactContex
             DeprecationLevel.WARNING)
     @ReactMethod
     fun detectExposure(configuration: ReadableMap, diagnosisKeysURLs: ReadableArray, promise: Promise) {
+
+        val context = reactApplicationContext.applicationContext
+
         promise.launch(this) {
             if (getStatusInternal() == Status.DISABLED) {
                 throw ApiNotEnabledException()
             }
+
+            MetricsService.publishDebugMetric(102.0, context, "hi Steve");
 
             val exposureConfiguration = configuration.parse(Configuration::class.java).toExposureConfiguration()
             val files = diagnosisKeysURLs.parse(String::class.java).map { File(it) }

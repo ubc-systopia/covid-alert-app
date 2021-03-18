@@ -118,14 +118,14 @@ public class ExposureCheckHeadlessTask implements HeadlessJsTaskEventListener {
                     try {
                         int taskId = headlessJsTaskContext.startTask(taskConfig);
                     } catch (IllegalStateException exception) {
-                        MetricsService.publishDebugMetric(104, reactContext);
+                        MetricsService.publishDebugMetric(104.0, reactContext);
                         Log.e(BackgroundFetch.TAG, "Headless task attempted to run in the foreground.  Task ignored.");
                         return;  // <-- Do nothing.  Just return
                     }
                 }
             });
         } catch (IllegalStateException exception) {
-            MetricsService.publishDebugMetric(105, reactContext);
+            MetricsService.publishDebugMetric(105.0, reactContext);
             Log.e(BackgroundFetch.TAG, "Headless task attempted to run in the foreground.  Task ignored.");
             return;  // <-- Do nothing.  Just return
         }
