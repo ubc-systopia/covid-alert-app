@@ -46,7 +46,7 @@ class ExposureCheckSchedulerWorker (val context: Context, parameters: WorkerPara
                         withContext(Dispatchers.Main) {
                             MetricsService.publishDebugMetric(3.2, context);
                             val completer = CompletableDeferred<Unit>()
-                            CustomHeadlessTask(applicationContext, HEADLESS_JS_TASK_NAME) { completer.complete(Unit) }
+                            CustomHeadlessTask(context, HEADLESS_JS_TASK_NAME) { completer.complete(Unit) }
                             completer.await()
                         }
                     }
