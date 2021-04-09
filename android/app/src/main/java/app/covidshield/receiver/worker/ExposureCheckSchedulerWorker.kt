@@ -4,7 +4,12 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import app.covidshield.BuildConfig
+import app.covidshield.exposurenotification.configuration.ConfigurationService
 import app.covidshield.extensions.log
+import app.covidshield.extensions.parse
+import app.covidshield.extensions.toExposureConfiguration
+import app.covidshield.models.Configuration
 import app.covidshield.services.metrics.MetricsService
 import com.facebook.react.ReactApplication
 import com.facebook.react.bridge.ReactContext
@@ -24,10 +29,17 @@ class ExposureCheckSchedulerWorker (val context: Context, parameters: WorkerPara
         Nearby.getExposureNotificationClient(context)
     }
 
+    private val configuration by lazy {
+        ConfigurationService.getInstance(context).retrieve(BuildConfig.EN_CONFIG_URL)
+    }
+
     override suspend fun doWork(): Result {
         Log.d("background", "ExposureCheckSchedulerWorker - doWork")
 
         MetricsService.publishDebugMetric(2.0, context)
+
+        val enConfiguration = configuration
+        Log.d("ExposureConfiguration: ", "Steps: $enConfiguration.transmissionRiskWeight")
 
         try {
             val enIsEnabled = exposureNotificationClient.isEnabled.await()

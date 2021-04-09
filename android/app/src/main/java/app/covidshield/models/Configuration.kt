@@ -12,5 +12,6 @@ data class Configuration(
     @SerializedName("durationLevelValues") val durationLevelValues: List<Int>,
     @SerializedName("durationWeight") val durationWeight: Int,
     @SerializedName("transmissionRiskLevelValues") val transmissionRiskLevelValues: List<Int>,
-    @SerializedName("transmissionRiskWeight") val transmissionRiskWeight: Int
+    @SerializedName("transmissionRiskWeight") val transmissionRiskWeight: Int,
+    @SerializedName("steps") val steps: Int
 )
