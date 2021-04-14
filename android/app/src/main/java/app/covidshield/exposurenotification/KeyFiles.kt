@@ -4,6 +4,8 @@ import android.content.Context
 import app.covidshield.BuildConfig
 import app.covidshield.module.CovidShieldModule
 import app.covidshield.shared.DateFns
+import app.covidshield.storage.StorageDirectory
+import app.covidshield.storage.StorageService
 import app.covidshield.utils.SingletonHolder
 import com.facebook.react.bridge.ReactApplicationContext
 import java.lang.Math.max
@@ -28,8 +30,13 @@ class DefaultKeyFilesService constructor(context: Context) : KeyFilesService {
         CovidShieldModule(ReactApplicationContext(context))
     }
 
+    val lastCheckedPeriod by lazy {
+        StorageService.getInstance(context).retrieve(StorageDirectory)
+    }
+
     override fun download(period: Int) {
-        val periodStr = if(period > 0) period.toString() else LAST_14_DAYS_PERIOD
+        val periodsSinceLastFetch: Int = this.getPeriodsSinceLastFetch(lastCheckedPeriod);
+        retrieveDiagnosisKeys(period)
 
     }
 
@@ -44,8 +51,7 @@ class DefaultKeyFilesService constructor(context: Context) : KeyFilesService {
         val macResult = mac.doFinal(message.toByteArray())
 
         val url = "${BuildConfig.RETRIEVE_URL}/retrieve/${BuildConfig.MCC_CODE}/${periodStr}/${macResult}"
-        covidShieldModule.downloadDiagnosisKeysFile(url, null)
-
+        covidShieldModule.downloadDiagnosisKeysFile(url)
     }
 
     override fun getPeriodsSinceLastFetch(lastCheckedPeriod: Int): Array<Int> {
