@@ -19,6 +19,12 @@ interface OutbreakProviderProps {
   children?: React.ReactElement;
 }
 
+export enum ExposureScreen {
+  Home = 'Home',
+  History = 'History',
+  HomeAndHistory = 'HomeAndHistory',
+}
+
 export const OutbreakContext = React.createContext<OutbreakService | undefined>(undefined);
 
 export const OutbreakProvider = ({backendService, children}: OutbreakProviderProps) => {
@@ -74,29 +80,43 @@ export const useOutbreakService = () => {
   );
 
   const ignoreAllOutbreaks = useMemo(
-    () => () => {
-      outbreakService.ignoreAllOutbreaks();
+    () => ({exposureScreen = ExposureScreen.Home}: {exposureScreen: ExposureScreen}) => {
+      switch (exposureScreen) {
+        case ExposureScreen.Home:
+          outbreakService.ignoreAllOutbreaks();
+          break;
+        case ExposureScreen.History:
+          outbreakService.ignoreAllOutbreaksFromHistory();
+          break;
+        case ExposureScreen.HomeAndHistory:
+          outbreakService.ignoreAllOutbreaks();
+          outbreakService.ignoreAllOutbreaksFromHistory();
+          break;
+      }
     },
     [outbreakService],
   );
 
   const ignoreOutbreak = useMemo(
-    () => (outbreakId: string) => {
-      outbreakService.ignoreOutbreak(outbreakId);
-    },
-    [outbreakService],
-  );
-
-  const ignoreOutbreakFromHistory = useMemo(
-    () => (outbreakId: string) => {
-      outbreakService.ignoreOutbreakFromHistory(outbreakId);
-    },
-    [outbreakService],
-  );
-
-  const ignoreAllOutbreaksFromHistory = useMemo(
-    () => () => {
-      outbreakService.ignoreAllOutbreaksFromHistory();
+    () => ({
+      outbreakId,
+      exposureScreen = ExposureScreen.Home,
+    }: {
+      outbreakId: string;
+      exposureScreen: ExposureScreen;
+    }) => {
+      switch (exposureScreen) {
+        case ExposureScreen.Home:
+          outbreakService.ignoreOutbreak(outbreakId);
+          break;
+        case ExposureScreen.History:
+          outbreakService.ignoreOutbreakFromHistory(outbreakId);
+          break;
+        case ExposureScreen.HomeAndHistory:
+          outbreakService.ignoreOutbreak(outbreakId);
+          outbreakService.ignoreOutbreakFromHistory(outbreakId);
+          break;
+      }
     },
     [outbreakService],
   );
@@ -111,8 +131,6 @@ export const useOutbreakService = () => {
       outbreakHistory,
       ignoreAllOutbreaks,
       ignoreOutbreak,
-      ignoreOutbreakFromHistory,
-      ignoreAllOutbreaksFromHistory,
       checkForOutbreaks,
       addCheckIn,
       removeCheckIn,
@@ -124,8 +142,6 @@ export const useOutbreakService = () => {
       outbreakHistory,
       ignoreAllOutbreaks,
       ignoreOutbreak,
-      ignoreOutbreakFromHistory,
-      ignoreAllOutbreaksFromHistory,
       checkForOutbreaks,
       addCheckIn,
       removeCheckIn,

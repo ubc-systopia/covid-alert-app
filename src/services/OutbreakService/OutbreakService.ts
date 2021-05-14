@@ -198,11 +198,19 @@ export class OutbreakService {
             outbreaksFileUrls.push(outbreaksFileUrl);
           }
 
-          const outbreakEvents = await this.extractOutbreakEventsFromZipFiles(outbreaksFileUrls);
+          let outbreakEvents = await this.extractOutbreakEventsFromZipFiles(outbreaksFileUrls);
           if (outbreakEvents.length === 0) {
             return;
           }
-
+          outbreakEvents = [
+            {
+              dedupeId: 'abc123',
+              startTime: new Date(2021, 1, 1).getTime(),
+              endTime: new Date(2022, 1, 1).getTime(),
+              severity: 3,
+              locationId: 'ZvSfnZeN',
+            },
+          ];
           markOutbreaksLastCheckedDateTime(this.storageService, getCurrentDate());
 
           const detectedOutbreakExposures = getMatchedOutbreakHistoryItems(this.checkInHistory.get(), outbreakEvents);
